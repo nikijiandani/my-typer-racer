@@ -1,17 +1,18 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Header from './components/Header'
 
 class App extends React.Component {
   constructor(){
     super()
     this.state = {
-      time: 0,
+      time: 10,
       targetWord: "",
       inputWord: "",
       score: 0,
       words: []
     }
+    this.timer = 0
   }
 
   componentDidMount(){
@@ -27,17 +28,19 @@ class App extends React.Component {
   }
 
   startTimer = () => {
-    this.timer = setInterval(
-      () => this.setState(prevState => ({ time: prevState.time - 1 })),
-      1000
-    )
+    this.timer = setInterval(() => {
+      let time = this.state.time
+      if(time === 0){
+        return this.stopTimer();
+      }
+      this.setState(
+        prevState => ({ time: prevState.time - 1 })
+      )
+    }, 1000)
   }
 
   stopTimer = () => {
     clearInterval(this.timer)
-    this.setState({
-      time: 0
-    })
   }
 
   newGame = () => {
@@ -47,9 +50,6 @@ class App extends React.Component {
     this.setState({
       time: 10
     })
-    if(this.state.time === 0){
-      this.gameOver()
-    }
   }
 
   newWord = () => {
@@ -57,10 +57,6 @@ class App extends React.Component {
     this.setState({
       targetWord: this.state.words[randomWord]
     })
-  }
-
-  gameOver = () => {
-    this.stopTimer()
   }
 
   onChange = (e) => {
@@ -84,10 +80,7 @@ class App extends React.Component {
   render(){
     return (
       <div className="App">
-        <header className="App-header">
-          <img className="App-logo" src={logo} alt="logo"/>
-          <h1>My Type Racer</h1>
-        </header>
+        <Header />
         <p>Timer: {this.state.time}</p>
         <p>Score: {this.state.score}</p>
         <div>{this.state.targetWord === "" ? (
