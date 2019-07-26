@@ -5,9 +5,10 @@ export default function useFetch(url) {
   
   useEffect(() => {
     fetch(url)
-      .then(response => response.json())
-      .then(data => setData(data));
-  }, []);
+    .then(response => response.json())
+    .then(data => setData(data))
+    .catch(() => console.log("Can’t access " + url + " response. Blocked by browser?"))
+  });
   
   return data;
 }
