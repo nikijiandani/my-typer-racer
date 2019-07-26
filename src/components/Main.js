@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import useFetch from './useFetch';
 import Game from './Game'
 

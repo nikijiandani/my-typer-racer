@@ -24,6 +24,10 @@ function Game(props) {
     startTimer()
   }
 
+  const restartGame = () => {
+    window.location.reload()
+  }
+
   const stopTimer = () => {
     clearInterval(timer.current)
   }
@@ -34,7 +38,7 @@ function Game(props) {
 
   const onKeyPress = (e) => {
     if(e.key === "Enter") {
-      if(e.target.value === targetWord){
+      if(e.target.value.toLowerCase() === targetWord){
         setScore(score + 1)
         e.target.value = ""
         newWord()
@@ -56,6 +60,7 @@ function Game(props) {
           <div>
             <p><strong>Game Over!!!</strong></p>
             <p>Your Score: {score}</p>
+            <button onClick={restartGame}>Replay?</button>
           </div>
           ) : (
           <div>
