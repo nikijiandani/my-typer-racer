@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import '../styles/game.css'
 
 function Game(props) {
   let timer = useRef(10)
@@ -48,7 +49,7 @@ function Game(props) {
 
   return (
     <>
-    <div>{targetWord === "" ? (
+    <div className="game">{targetWord === "" ? (
       <div>
         <p>Click on New Game to begin</p>
         <button onClick={newGame}>New Game</button>

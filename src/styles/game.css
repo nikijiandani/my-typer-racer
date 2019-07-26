@@ -1,0 +1,11 @@
+.game {
+  font-size: 2em;
+}
+.game imput {
+  width: 5em;
+}
+.game button {
+  width: 10em;
+  height: 3em;
+  border-radius: 3px;
+}
