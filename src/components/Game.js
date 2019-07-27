@@ -20,7 +20,7 @@ function Game(props) {
   }
 
   const newGame = () => {
-    console.log(props.words)
+    // console.log(props.words)
     newWord()
     startTimer()
   }
@@ -41,11 +41,13 @@ function Game(props) {
     if(e.key === "Enter") {
       if(e.target.value.toLowerCase() === targetWord){
         setScore(score + 1)
-        e.target.value = ""
+        setInputWord("")
         newWord()
       }
     }
   }
+
+  if(time <= 0) stopTimer()
 
   return (
     <>
@@ -56,7 +58,6 @@ function Game(props) {
       </div>
       ):(
       <div>
-        {time <= 0 ? stopTimer(): ""}
         {time <= 0 ? (
           <div>
             <p><strong>Game Over!!!</strong></p>
@@ -68,7 +69,7 @@ function Game(props) {
             <p>Time left: {time} s</p>
             <p>Score: {score}</p>
             <p><span>Type this: </span><br /> {targetWord}</p>
-            <input type="text" onChange={onChange} onKeyPress={onKeyPress}/><br/>
+            <input type="text" onChange={onChange} onKeyPress={onKeyPress} value={inputWord}/><br/>
           </div>
         )}
       </div>)}
